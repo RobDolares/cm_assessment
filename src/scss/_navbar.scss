@@ -1,3 +1,6 @@
+@import "mixins";
+
+
 header {
   max-width: 1200px;
   margin: 0 auto;
@@ -22,7 +25,6 @@ header {
       margin: 0 auto;
       text-decoration: none;
       text-transform: uppercase;
-      transition: 0.8s;
 
       @media screen and (min-width: 680px) {
         &:before {
@@ -34,16 +36,13 @@ header {
           left: 0;
           background-color: $primary-color;
           visibility: hidden;
-          -webkit-transform: scaleX(0);
-          transform: scaleX(0);
-          -webkit-transition: all 0.3s ease-in-out 0s;
-          transition: all 0.3s ease-in-out 0s;
+          @include transform(scaleX(0));
+          @include transition(all,0.3s,ease-in-out);
         }
 
         &:hover:before {
           visibility: visible;
-          -webkit-transform: scaleX(1);
-          transform: scaleX(1);
+          @include transform(scaleX(1));
         }
       }
 
@@ -56,7 +55,7 @@ header {
         &:hover {
           background-color: $ternary-color;
           color: $text-color-darkest;
-          transition: 0.3s;
+          @include transition(all,0.3s,ease-in-out);
         }
       }
     }
