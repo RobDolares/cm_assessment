@@ -1,13 +1,243 @@
-//variables
+// variables
 $body-bg: #fff;
+$text-color-darkest: #666f77;
+$text-color-dark: #555f66;
+$text-color-lightest: #fff;
+$text-color-light: #bbb;
+$primary-color: #4ac1ff;
+$secondary-color: #39a2f9;
+$ternary-color: #fff;
 
 
-// main
-* {
+//imports
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
+@import "navbar";
+@import "mixins";
+
+
+
+// functions
+
+@function set-text-color($bg-color){
+  @if(lightness($bg-color)>50){
+    @return $ternary-color;
+  } @else {
+    @return $primary-color;
+  }
+}
+
+
+// globals, resets
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 body {
-  background: $body-bg;
+  margin: 0 auto;
+  background: transparent;
+  font-family: 'Open Sans' sans-serif;
+
+}
+
+main {
+    background: #fff url("../../images/hero.png") no-repeat top;
+
+  h1,
+  h2,
+  h3,
+  p {
+    font-weight: 300;
+    color: $text-color-darkest;
+  }
+
+  /*************************************/
+  /**********  hero section  **********/
+  /*************************************/
+
+  .hero {
+    @include flexbox();
+    @include flex-direction();
+    @include justify-content();
+    text-align: center;
+    margin: 0 auto;
+    height: 414px;
+
+    h1 {
+      font-weight: 600;
+      font-size: 45px;
+      color: $text-color-lightest;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-size: 19px;
+      color: $text-color-lightest;
+    }
+
+    button {
+      color: white;
+      font-size: 17px;
+      padding: 10px 46px;
+      margin: 25px auto;
+      background-color: $primary-color;
+      text-transform: uppercase;
+      border: none;
+      @include rounded();
+    }
+  }
+  /*************************************/
+  /**********  intro section  **********/
+  /*************************************/
+  .intro {
+    h1 {
+      font-size: 32px;
+      line-height: 28px;
+      text-align: center;
+      text-transform: uppercase;
+      color: $text-color-dark;
+      letter-spacing: 2.4px;
+      font-weight: 400;
+      margin-top: 70px;
+    }
+
+    h2 {
+      font-size: 19px;
+      text-align: center;
+      line-height: 31px;
+      color: $text-color-light;
+      letter-spacing: 0.19px;
+    }
+
+    .card-container {
+      @include flexbox();
+      @include justify-content(space-between);
+      max-width: 1000px;
+      margin: 51px auto;
+
+
+      @media only screen and (max-width: 680px) {
+        @include flex-direction();
+      }
+
+
+      /******** Individual cards ********/
+
+
+      .card {
+        @include flexbox();
+        @include flex-direction();
+        @include align-items();
+        @include justify-content(space-around);
+        max-width: 300px;
+        min-height: 365px;
+        padding: 1.2em 0;
+        margin: 20px;
+        border: 1px solid #cbcfd3;
+        @include rounded();
+        &:hover {
+          background-color: $primary-color;
+          .icon-container {
+            background-color: $ternary-color;
+            i {
+              color: $primary-color;
+              -webkit-animation: rotating 3s linear infinite;
+              -moz-animation: rotating 2s linear infinite;
+              -ms-animation: rotating 2s linear infinite;
+              -o-animation: rotating 2s linear infinite;
+              animation: rotating 3s linear infinite;
+            }
+          }
+          h3,p{
+            color: set-text-color($text-color-lightest);
+          }
+        }
+
+        .icon-container {
+          background-color: $primary-color;
+          height: 106px;
+          width: 106px;
+          @include rounded(50%);
+          @include flexbox();
+          @include justify-content();
+          @include align-items();
+
+          i {
+            font-size: 40px;
+            color: $ternary-color;
+            position: relative;
+          }
+        }
+
+        h3 {
+          font-size: 18px;
+          line-height: 31px;
+          text-transform: uppercase;
+        }
+
+        p {
+          font-size: 16px;
+          text-align: center;
+          padding: 0 10px;
+
+
+          @media only screen and (min-width: 900px){
+            line-height: 31px;
+            padding: 0 30px;
+          }
+        }
+
+        @media only screen and (max-width: 680px) {
+          max-width: 90%;
+          margin: 20px auto;
+          min-height: 280px;
+        }
+      }
+    }
+  }
+}
+
+
+// refactor below for mixin
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  -webkit-animation: rotating 3s linear infinite;
+  -moz-animation: rotating 2s linear infinite;
+  -ms-animation: rotating 2s linear infinite;
+  -o-animation: rotating 2s linear infinite;
+  animation: rotating 3s linear infinite;
 }

@@ -1,0 +1,105 @@
+header {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navbar {
+  min-height: 104px;
+  position: relative;
+
+  img {
+    margin: 58px 0 0 20px;
+  }
+
+  .navlink-container {
+    float: right;
+    margin-top: 54px;
+
+    a {
+      color: $text-color-dark;
+      text-align: center;
+      padding: 6px 16px;
+      margin: 0 auto;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: 0.8s;
+
+      @media screen and (min-width: 680px) {
+        &:before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 2px;
+          bottom: 0;
+          left: 0;
+          background-color: $primary-color;
+          visibility: hidden;
+          -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+          -webkit-transition: all 0.3s ease-in-out 0s;
+          transition: all 0.3s ease-in-out 0s;
+        }
+
+        &:hover:before {
+          visibility: visible;
+          -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+        }
+      }
+
+      &:last-child {
+        font-weight: 400;
+        border-radius: 5px;
+        color: $ternary-color;
+        background-color: $primary-color;
+
+        &:hover {
+          background-color: $ternary-color;
+          color: $text-color-darkest;
+          transition: 0.3s;
+        }
+      }
+    }
+
+    .burger {
+      display: none;
+    }
+  }
+}
+@media screen and (max-width: 680px) {
+  .navbar {
+    padding-top: 35px;
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .navlink-container {
+      margin-top: 10px;
+      float: unset;
+
+      a {
+        display: none;
+      }
+
+      .burger {
+        margin: 0;
+        display: block;
+      }
+    }
+  }
+}
+@media screen and (max-width: 680px) {
+  .navbar .responsive {
+    position: relative;
+  }
+
+  .navbar .responsive .burger {
+    margin: 0 auto;
+  }
+
+  .responsive .navlink-container a {
+    display: block;
+  }
+}
